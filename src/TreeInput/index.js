@@ -12,10 +12,6 @@ const TreeInput = () => {
 
   const [jsonObject, setJsonObject] = useState(new BinTreeNode());
 
-  const onChange = (e) => {
-    setTreeText(e.target.value);
-  };
-
   const hasJsonStructure = (str) => {
     if (typeof str !== "string") return false;
     try {
@@ -61,11 +57,32 @@ const TreeInput = () => {
     }
   };
 
+  const onChange = (e) => {
+    if (hasJsonStructure(e.target.value)) {
+      setJsonText(e.target.value);
+      setJsonObject(JSON.parse(e.target.value));
+      setError("");
+    } else {
+      setJsonText(e.target.value);
+      setError("Invalid input, please validate and retry.");
+    }
+  };
+
+  const ReadFile = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      setTreeText(e.target.result);
+      console.log(treeText);
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+
   return (
     <div>
       <h2>Process the Input into a tree</h2>
       <p>Tree source</p>
-      <input type="text" onChange={onChange}></input>
+      <input type="file" onChange={(e) => ReadFile(e)} />
       <button onClick={onSubmit}>Fetch</button>
       {errorText !== "" ? (
         <div className="Error">
@@ -75,10 +92,11 @@ const TreeInput = () => {
       <div></div>
       <br></br>
       <textarea
-        defaultValue={jsonText}
+        value={jsonText}
         className="Tree-TextArea"
         rows="20"
         cols="50"
+        onChange={onChange}
       ></textarea>
       <br></br>
       <h2>Output</h2>
