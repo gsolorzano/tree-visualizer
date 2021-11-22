@@ -1,0 +1,20 @@
+.treeNode {
+  text-align: center;
+  border: 1px;
+  border-color: red;
+  border-style: solid;
+  margin-bottom: 10px;
+}
+
+.treeNode > .nodeId {
+  font-weight: bold;
+}
+.treeNode > .nodeChildren {
+  padding: 10px;
+  border: 1px;
+  border-color: blue;
+  border-style: solid;
+}
+
+.nodeChildren > .treeNode {
+}
