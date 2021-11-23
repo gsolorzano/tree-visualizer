@@ -16,5 +16,11 @@
   border-style: solid;
 }
 
-.nodeChildren > .treeNode {
+.isSmallestDeepest {
+  font-weight: bold;
+  text-align: center;
+  border: 2px;
+  border-color: green;
+  border-style: solid;
+  margin-bottom: 10px;
 }

@@ -6,3 +6,11 @@
 .Error > p {
   padding-left: 10px;
 }
+
+.btn-space {
+  margin-right: 5px;
+}
+
+textarea {
+  width: 82%;
+}

@@ -1,10 +1,18 @@
 import BinTreeNode from "../Models/BinTreeNode";
 import "./TreeOutput.css";
 
-const TreeOutput = ({ treeText, treeJson = new BinTreeNode() }) => {
+const TreeOutput = ({ treeJson = new BinTreeNode() }) => {
   console.log(treeJson);
+
+  // treeJson.id === undefined ? (
+  //   <div></div>
+  // ) :
   return (
-    <div className="treeNode container">
+    <div
+      className={`container ${
+        treeJson.isSmallestDeepest ? "isSmallestDeepest" : "treeNode"
+      }`}
+    >
       <div className="nodeId">
         <p>{treeJson?.id}</p>
       </div>
