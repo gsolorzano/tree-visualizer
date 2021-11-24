@@ -80,12 +80,21 @@ const TreeInput = () => {
       <div className="row">
         <div className="col-sm-4 col-md-4">
           <h2>Process the Input into a tree</h2>
-          <p>Tree source</p>
+          <hr></hr>
+          <h5>1. Select a file and fetch the data</h5>
           <input type="file" onChange={(e) => ReadFile(e)} ref={ref} />
-          <button onClick={onSubmit} className="btn btn-primary btn-space">
+          <button
+            onClick={onSubmit}
+            className="btn btn-primary btn-space"
+            disabled={treeText === ""}
+          >
             Fetch
           </button>
-          <button className="btn btn-danger" onClick={ClearAll}>
+          <button
+            className="btn btn-danger"
+            onClick={ClearAll}
+            disabled={jsonText === ""}
+          >
             <i className="bi bi-trash"></i>
           </button>
           {errorText !== "" ? (
@@ -95,6 +104,10 @@ const TreeInput = () => {
           ) : null}
           <div></div>
           <br></br>
+          <h5>
+            2. Edit the generated tree, changes will be rendered in the output
+            section
+          </h5>
           <textarea
             value={jsonText}
             className="Tree-TextArea"
