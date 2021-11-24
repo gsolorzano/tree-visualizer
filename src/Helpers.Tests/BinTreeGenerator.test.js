@@ -1,5 +1,5 @@
 import GenerateTree from "../Helpers/BinTreeGenerator";
-import Replacer from "../Helpers/JsonHelper";
+import { Replacer } from "../Helpers/JsonHelper";
 
 test("GenerateTree should return valid json - sample 1", () => {
   // Arrange

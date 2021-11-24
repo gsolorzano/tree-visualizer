@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Tree Traversal App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of contents
 
-## Available Scripts
+1. [Problem 1 thought process](#1)
+2. [Problem 3 thought process](#3)
+3. [Running the App](#run)
+4. [Running Tests](#tests)
+5. [Bonus](#bonus)
 
-In the project directory, you can run:
+<div id='1'> </div>
 
-### `yarn start`
+## Problem 1 thought process <a name="1"></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The code for project 1 can be located in: \
+`src\Helpers\BinTreeGenerator.js`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+For the solution of the first problems I thought of creating a recursive alorithm, as when thinking of how a tree is generated I imagine repetitive tasks, let me explain.
 
-### `yarn test`
+Imagine a complex binary tree with many children on the left and right. We can isolate each generation into 2 groups, Parent and children. A parent will be the id of the node, and its children will be a binary tree node themselves (we can see them as each being a tree themselves). When we start to generate these trees we create a id for the root and then create a new tree for each children. If we start on the left, then the left node is now a root and we need to create a binary tree for each of its childrens.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Here is the repetitive pattern. So to reproduce this in code, I used recursion. This allows for a cleaner code and more direct implementation from the idea I have, where just doing the following logic:
 
-### `yarn build`
+```js
+return new BinTreeNode(
+  array[0],
+  GenerateTree(array[1]),
+  GenerateTree(array[2])
+);
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Will yield assingning the id of the node to the root, and calling to generate the tree again for each children.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<div id='3'> </div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Problem 3 thought process <a name="3"></a>
 
-### `yarn eject`
+For the solution of finding the smallest subtree with the deepest nodes, I followed a similar approach to problem 1.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+First I need to know which child has the greatest depth, to do this I follow this logic:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I need to calculate the depth of each child, so this means calling going to the end of the tree and count how deep we are. This can be done with recursion where we traverse the tree until we get to the bottom and start to add the times we went down in the tree.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Having both of the height we can then check which child is deeper, this indicates where the deepest nodes will be. Then we will go ahead and call recursively to the deepest child untile we get to the base case. This will be that both of the nodes we are in right now are the same height. This means we found ourselves the smallest deepest subtree. In this solution I added a boolean flag to indicate which node is the root of the smallest deepest subtree. This will allow me to draw the green 2px border with ease on the root that has this flag on true.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Some assumptions I made where that the tree Im getting is already generated with the correct structure from the previous problems. Some engineering tradeoffs I made in all my solutions are using recursion. Recursion is not bad, but can generate problems if not implemented properly. These problems could be made iteratively, but I like to be able to imagine my solution and print it in code without having to do many translations. For these exercises this was easily done with the aid of recursion.
 
-## Learn More
+<div id='run'> </div>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## App structure <a name="structure"></a>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The app is utilizing react, with a project created using create-react app. As main language its using Javascript. For state management I decided to use React Hooks. The external libraries intalled are:
 
-### Code Splitting
+- Bootstrap 5
+- Bootstrap-icons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<div id='run'> </div>
 
-### Analyzing the Bundle Size
+## Running the App <a name="run"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To run the app follow these steps
 
-### Making a Progressive Web App
+1. Run the dependency installer with the command: `yarn`
+2. Start the application with the following command: `yarn start`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Inisde the Samples folder you will find 3 files with the samples given in the instructions for problem 1 to test out the solution.
 
-### Advanced Configuration
+<div id='tests'> </div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Running Tests
 
-### Deployment
+To run the unit tests in the app run the following command: `yarn test`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+If greeted with the message: `No tests found related to files changed since last commit.` \
+Click `a` to run all the tests inside the repository
 
-### `yarn build` fails to minify
+<div id='bonus'> </div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Bonus
+
+For the bonus features I decided to tinker with the UI placements. In the example all the elements where located in a vertical way, which left many white unused sapce in the browser. I decided to change the output placement to be on the right hand side of the view. This allows the user of the page to have to move less an be able to have in hand both the text area and the output diagram.
+
+I also decided to add a clear button next to the fetch to allow the user to re run all the initial flow without having to refresh the view.

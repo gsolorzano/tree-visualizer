@@ -3,7 +3,7 @@ import TreeOutput from "../TreeOutput";
 import BinTreeNode from "../Models/BinTreeNode";
 import GenerateTree from "../Helpers/BinTreeGenerator";
 import FindSamalletDeepestTree from "../Helpers/BinTreeSmallestDeepest";
-import Replacer from "../Helpers/JsonHelper";
+import { Replacer, HasJsonStructure, IsJsonArray } from "../Helpers/JsonHelper";
 import "./TreeInput.css";
 
 const TreeInput = () => {
@@ -17,33 +17,22 @@ const TreeInput = () => {
 
   const ref = useRef();
 
-  const hasJsonStructure = (str) => {
-    if (typeof str !== "string") return false;
-    try {
-      const result = JSON.parse(str);
-      const type = Object.prototype.toString.call(result);
-      return type === "[object Object]" || type === "[object Array]";
-    } catch (err) {
-      return false;
-    }
-  };
-
   const onSubmit = (e) => {
-    if (hasJsonStructure(treeText)) {
+    if (HasJsonStructure(treeText) && IsJsonArray(treeText)) {
       e.preventDefault();
       let json = GenerateTree(JSON.parse(treeText));
       setJsonText(JSON.stringify(json, Replacer, 4));
       setJsonObject(FindSamalletDeepestTree(json));
       setError("");
     } else {
-      setError("Invalid input, please validate and retry.");
+      setError("Invalid file contents format, please validate and retry.");
       setJsonText("");
       setJsonObject(new BinTreeNode());
     }
   };
 
   const onChange = (e) => {
-    if (hasJsonStructure(e.target.value)) {
+    if (HasJsonStructure(e.target.value)) {
       setJsonText(e.target.value);
       setJsonObject(FindSamalletDeepestTree(JSON.parse(e.target.value)));
       setError("");
@@ -54,13 +43,16 @@ const TreeInput = () => {
   };
 
   const ReadFile = (e) => {
-    e.preventDefault();
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      setTreeText(e.target.result);
-      console.log(treeText);
-    };
-    reader.readAsText(e.target.files[0]);
+    try {
+      e.preventDefault();
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        setTreeText(e.target.result);
+      };
+      reader.readAsText(e.target.files[0]);
+    } catch {
+      setError("Error reading file content, please validate and retry.");
+    }
   };
 
   const ClearAll = () => {
@@ -93,7 +85,7 @@ const TreeInput = () => {
           <button
             className="btn btn-danger"
             onClick={ClearAll}
-            disabled={jsonText === ""}
+            hidden={jsonText === ""}
           >
             <i className="bi bi-trash"></i>
           </button>
@@ -111,7 +103,7 @@ const TreeInput = () => {
           <textarea
             value={jsonText}
             className="Tree-TextArea"
-            rows="20"
+            rows="15"
             onChange={onChange}
             disabled={jsonText === ""}
           ></textarea>

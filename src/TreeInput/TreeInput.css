@@ -1,6 +1,7 @@
 .Error {
+  margin-top: 10px;
   background-color: rgb(255, 96, 88);
-  width: 20%;
+  width: 90%;
 }
 
 .Error > p {
