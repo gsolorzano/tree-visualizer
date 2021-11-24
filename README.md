@@ -4,13 +4,14 @@
 
 1. [Problem 1 thought process](#1)
 2. [Problem 3 thought process](#3)
-3. [Running the App](#run)
-4. [Running Tests](#tests)
-5. [Bonus](#bonus)
+3. [App structure](#structure)
+4. [Running the App](#run)
+5. [Running Tests](#tests)
+6. [Bonus](#bonus)
 
 <div id='1'> </div>
 
-## Problem 1 thought process <a name="1"></a>
+## Problem 1 thought process
 
 The code for project 1 can be located in: \
 `src\Helpers\BinTreeGenerator.js`
@@ -33,7 +34,7 @@ Will yield assingning the id of the node to the root, and calling to generate th
 
 <div id='3'> </div>
 
-## Problem 3 thought process <a name="3"></a>
+## Problem 3 thought process
 
 For the solution of finding the smallest subtree with the deepest nodes, I followed a similar approach to problem 1.
 
@@ -45,9 +46,9 @@ Having both of the height we can then check which child is deeper, this indicate
 
 Some assumptions I made where that the tree Im getting is already generated with the correct structure from the previous problems. Some engineering tradeoffs I made in all my solutions are using recursion. Recursion is not bad, but can generate problems if not implemented properly. These problems could be made iteratively, but I like to be able to imagine my solution and print it in code without having to do many translations. For these exercises this was easily done with the aid of recursion.
 
-<div id='run'> </div>
+<div id='structure'> </div>
 
-## App structure <a name="structure"></a>
+## App structure
 
 The app is utilizing react, with a project created using create-react app. As main language its using Javascript. For state management I decided to use React Hooks. The external libraries intalled are:
 
@@ -56,7 +57,7 @@ The app is utilizing react, with a project created using create-react app. As ma
 
 <div id='run'> </div>
 
-## Running the App <a name="run"></a>
+## Running the App
 
 To run the app follow these steps
 
@@ -80,4 +81,4 @@ Click `a` to run all the tests inside the repository
 
 For the bonus features I decided to tinker with the UI placements. In the example all the elements where located in a vertical way, which left many white unused sapce in the browser. I decided to change the output placement to be on the right hand side of the view. This allows the user of the page to have to move less an be able to have in hand both the text area and the output diagram.
 
-I also decided to add a clear button next to the fetch to allow the user to re run all the initial flow without having to refresh the view.
+I also decided to add a clear button next to the fetch to allow the users to clear the page without having to refresh the view.
