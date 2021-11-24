@@ -1,12 +1,12 @@
-import FindSamalletDeepestTree from "../Helpers/BinTreeSmallestDeepest";
+import FindSmallestDeepestTree from "../Helpers/BinTreeSmallestDeepest";
 import BinTreeNode from "../Models/BinTreeNode";
 
-test("FindSamalletDeepestTree should find tree root as smallest deepest", () => {
+test("FindSmallestDeepestTree should find tree root as smallest deepest", () => {
   // Arrange
   let tree = new BinTreeNode("a", new BinTreeNode("b"), new BinTreeNode("c"));
 
   // Act
-  let actual = FindSamalletDeepestTree(tree);
+  let actual = FindSmallestDeepestTree(tree);
 
   // Assert
   expect(actual.isSmallestDeepest).toEqual(true);
@@ -14,7 +14,7 @@ test("FindSamalletDeepestTree should find tree root as smallest deepest", () => 
   expect(actual.right.isSmallestDeepest).toEqual(false);
 });
 
-test("FindSamalletDeepestTree should find correct smallest deepest tree", () => {
+test("FindSmallestDeepestTree should find correct smallest deepest tree", () => {
   // Arrange
   let tree = new BinTreeNode(
     "a",
@@ -23,7 +23,7 @@ test("FindSamalletDeepestTree should find correct smallest deepest tree", () => 
   );
 
   // Act
-  let actual = FindSamalletDeepestTree(tree);
+  let actual = FindSmallestDeepestTree(tree);
 
   // Assert
   expect(actual.isSmallestDeepest).toEqual(false);

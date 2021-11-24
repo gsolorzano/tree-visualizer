@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import TreeOutput from "../TreeOutput";
 import BinTreeNode from "../Models/BinTreeNode";
 import GenerateTree from "../Helpers/BinTreeGenerator";
-import FindSamalletDeepestTree from "../Helpers/BinTreeSmallestDeepest";
+import FindSmallestDeepestTree from "../Helpers/BinTreeSmallestDeepest";
 import { Replacer, HasJsonStructure, IsJsonArray } from "../Helpers/JsonHelper";
 import "./TreeInput.css";
 
@@ -22,7 +22,7 @@ const TreeInput = () => {
       e.preventDefault();
       let json = GenerateTree(JSON.parse(treeText));
       setJsonText(JSON.stringify(json, Replacer, 4));
-      setJsonObject(FindSamalletDeepestTree(json));
+      setJsonObject(FindSmallestDeepestTree(json));
       setError("");
     } else {
       setError("Invalid file contents format, please validate and retry.");
@@ -34,7 +34,7 @@ const TreeInput = () => {
   const onChange = (e) => {
     if (HasJsonStructure(e.target.value)) {
       setJsonText(e.target.value);
-      setJsonObject(FindSamalletDeepestTree(JSON.parse(e.target.value)));
+      setJsonObject(FindSmallestDeepestTree(JSON.parse(e.target.value)));
       setError("");
     } else {
       setJsonText(e.target.value);

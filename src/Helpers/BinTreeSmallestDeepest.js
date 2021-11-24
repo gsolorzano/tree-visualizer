@@ -17,7 +17,7 @@ const FindMaxHeight = (tree) => {
 
 // Finds the Smallest sub tree with deepest nodes
 // Receives the tree from which to find the smallest sub tree with deepest nodes
-const FindSamalletDeepestTree = (tree) => {
+const FindSmallestDeepestTree = (tree) => {
   // Base case, root is null, return the current
   if (tree == null) return null;
 
@@ -28,13 +28,13 @@ const FindSamalletDeepestTree = (tree) => {
   // If left height is larger than right height, then the deepest node is on the left
   // We calculate recursively with the left child
   if (left_ht > right_ht) {
-    FindSamalletDeepestTree(tree.left);
+    FindSmallestDeepestTree(tree.left);
   }
 
   // If right height is larger than left height, then the deepest node is on the right
   // We calculate recursively with the right child
   else if (right_ht > left_ht) {
-    FindSamalletDeepestTree(tree.right);
+    FindSmallestDeepestTree(tree.right);
   }
 
   // Both childs of this node have same height which means we cannot find another
@@ -46,4 +46,4 @@ const FindSamalletDeepestTree = (tree) => {
   return tree;
 };
 
-export default FindSamalletDeepestTree;
+export default FindSmallestDeepestTree;
