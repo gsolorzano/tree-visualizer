@@ -13,7 +13,7 @@
 
 ## Problem 1 thought process
 
-The code for project 1 can be located in: \
+The code for problem 1 can be located in: \
 `src\Helpers\BinTreeGenerator.js`
 
 For the solution of the first problems I thought of creating a recursive algorithm, as when thinking of how a tree is generated I imagine repetitive tasks, let me explain.
